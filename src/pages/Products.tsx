@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useProducts } from '@/hooks/useProducts';
@@ -28,6 +27,12 @@ const Products = () => {
       setFilters(prev => ({
         ...prev,
         categoria: [categoria]
+      }));
+    } else {
+      // Si no hay parámetro de categoría, limpiar el filtro
+      setFilters(prev => ({
+        ...prev,
+        categoria: []
       }));
     }
   }, [searchParams]);
@@ -95,6 +100,12 @@ const Products = () => {
 
   const handleFilterChange = (newFilters: FilterState) => {
     setFilters(newFilters);
+    // Actualizar URL si hay filtro de categoría
+    if (newFilters.categoria.length > 0) {
+      setSearchParams({ categoria: newFilters.categoria[0] });
+    } else {
+      setSearchParams({});
+    }
   };
 
   const handlePageChange = (page: number) => {
