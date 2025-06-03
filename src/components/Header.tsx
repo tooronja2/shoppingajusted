@@ -10,7 +10,9 @@ const Header = () => {
 
   const navigation = [
     { name: 'Inicio', href: '/' },
-    { name: 'Productos', href: '/productos' },
+    { name: 'Todos los productos', href: '/productos' },
+    { name: 'Lanzamientos', href: '/lanzamientos' },
+    { name: 'Ofertas', href: '/ofertas' },
     { name: 'Camisas', href: '/productos?categoria=Camisas' },
     { name: 'Vestidos', href: '/productos?categoria=Vestidos' },
     { name: 'Pantalones', href: '/productos?categoria=Pantalones' },

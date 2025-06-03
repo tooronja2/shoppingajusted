@@ -8,6 +8,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Home from "@/pages/Home";
 import Products from "@/pages/Products";
+import Lanzamientos from "@/pages/Lanzamientos";
+import Ofertas from "@/pages/Ofertas";
 import ProductDetail from "@/pages/ProductDetail";
 import Cart from "@/pages/Cart";
 import Checkout from "@/pages/Checkout";
@@ -27,6 +29,8 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/productos" element={<Products />} />
+              <Route path="/lanzamientos" element={<Lanzamientos />} />
+              <Route path="/ofertas" element={<Ofertas />} />
               <Route path="/producto/:sku" element={<ProductDetail />} />
               <Route path="/carrito" element={<Cart />} />
               <Route path="/checkout" element={<Checkout />} />
