@@ -1,0 +1,113 @@
+
+[
+  {
+    "sku": "SKU001",
+    "nombre": "Camisa de Lino Blanca Premium",
+    "categoria": "Camisas",
+    "precio": 2999.99,
+    "descripcion_corta": "Fresca y elegante, ideal para verano.",
+    "descripcion_larga": "Confeccionada con lino 100% natural de la más alta calidad. Esta camisa combina comodidad y elegancia, perfecta para ocasiones especiales o uso diario. Su tejido transpirable y su corte moderno la convierten en una pieza esencial del guardarropa.",
+    "fotos": [
+      "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=800&h=1000&fit=crop",
+      "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=800&h=1000&fit=crop"
+    ],
+    "disponible": true,
+    "cantidad_stock": 50,
+    "detalles": {
+      "talla": ["S", "M", "L", "XL"],
+      "color": "Blanco",
+      "material": "Lino 100%"
+    },
+    "fecha_agregado": "2025-06-03T10:00:00Z",
+    "slug_url_producto": "camisa-lino-blanca-premium"
+  },
+  {
+    "sku": "SKU002",
+    "nombre": "Vestido Floral de Verano",
+    "categoria": "Vestidos",
+    "precio": 4299.99,
+    "descripcion_corta": "Vestido ligero con estampado floral único.",
+    "descripcion_larga": "Un hermoso vestido de verano con estampado floral exclusivo. Confeccionado en algodón suave y transpirable, perfecto para días soleados. Su corte favorecedor y longitud midi lo hacen ideal para múltiples ocasiones.",
+    "fotos": [
+      "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800&h=1000&fit=crop",
+      "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=800&h=1000&fit=crop"
+    ],
+    "disponible": true,
+    "cantidad_stock": 25,
+    "detalles": {
+      "talla": ["XS", "S", "M", "L"],
+      "color": "Multicolor",
+      "material": "Algodón",
+      "largo": "Midi"
+    },
+    "fecha_agregado": "2025-06-02T15:30:00Z",
+    "slug_url_producto": "vestido-floral-verano"
+  },
+  {
+    "sku": "SKU003",
+    "nombre": "Pantalón Denim Clásico",
+    "categoria": "Pantalones",
+    "precio": 3599.99,
+    "descripcion_corta": "Denim de alta calidad con corte moderno.",
+    "descripcion_larga": "Pantalón de denim clásico confeccionado con algodón premium. Su corte moderno y versátil se adapta a cualquier ocasión. Disponible en múltiples tallas con un ajuste perfecto que resalta la silueta.",
+    "fotos": [
+      "https://images.unsplash.com/photo-1542272604-787c3835535d?w=800&h=1000&fit=crop",
+      "https://images.unsplash.com/photo-1475178626620-a4d074967452?w=800&h=1000&fit=crop"
+    ],
+    "disponible": true,
+    "cantidad_stock": 35,
+    "detalles": {
+      "talla": ["28", "30", "32", "34", "36"],
+      "color": "Azul índigo",
+      "material": "Denim",
+      "corte": "Slim fit"
+    },
+    "fecha_agregado": "2025-06-01T08:00:00Z",
+    "slug_url_producto": "pantalon-denim-clasico"
+  },
+  {
+    "sku": "SKU004",
+    "nombre": "Blazer Negro Elegante",
+    "categoria": "Blazers",
+    "precio": 5999.99,
+    "descripcion_corta": "Blazer sofisticado para ocasiones especiales.",
+    "descripcion_larga": "Blazer elegante en color negro, confeccionado con materiales de primera calidad. Su corte entallado y acabados impecables lo convierten en la pieza perfecta para eventos formales o para elevar cualquier look casual.",
+    "fotos": [
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=1000&fit=crop",
+      "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=800&h=1000&fit=crop"
+    ],
+    "disponible": false,
+    "cantidad_stock": 0,
+    "detalles": {
+      "talla": ["S", "M", "L", "XL"],
+      "color": "Negro",
+      "material": "Poliéster y Lana",
+      "ocasion": "Formal"
+    },
+    "fecha_agregado": "2025-05-30T12:00:00Z",
+    "slug_url_producto": "blazer-negro-elegante"
+  },
+  {
+    "sku": "SKU005",
+    "nombre": "Falda Midi Rosa",
+    "categoria": "Faldas",
+    "precio": 2799.99,
+    "descripcion_corta": "Falda midi en tono rosa suave y romántico.",
+    "descripcion_larga": "Falda midi de corte A en un hermoso tono rosa. Confeccionada en tejido fluido que crea un movimiento elegante al caminar. Perfecta para combinar con blusas o camisetas, ideal para looks tanto casuales como semi-formales.",
+    "fotos": [
+      "https://images.unsplash.com/photo-1583496661160-fb5886a13d44?w=800&h=1000&fit=crop",
+      "https://images.unsplash.com/photo-1594834894748-2d22b2e0486a?w=800&h=1000&fit=crop"
+    ],
+    "disponible": true,
+    "cantidad_stock": 40,
+    "detalles": {
+      "talla": ["XS", "S", "M", "L", "XL"],
+      "color": "Rosa",
+      "material": "Poliéster",
+      "largo": "Midi",
+      "corte": "A-line"
+    },
+    "fecha_agregado": "2025-05-28T16:45:00Z",
+    "slug_url_producto": "falda-midi-rosa"
+  }
+]

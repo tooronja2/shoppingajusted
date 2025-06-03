@@ -1,0 +1,11 @@
+
+{
+  "banner": {
+    "titulo": "Nueva Colección Verano 2025",
+    "subtitulo": "Descubre las últimas tendencias en moda femenina y masculina",
+    "imagen": "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=1200&h=600&fit=crop",
+    "cta_texto": "Ver Colección",
+    "cta_link": "/productos"
+  },
+  "productos_destacados_cantidad": 4
+}
