@@ -113,7 +113,7 @@ const Products = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">Nuestros Productos</h1>
+        <h1 className="text-3xl font-bold text-gray-900 mb-4">Productos</h1>
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <p className="text-gray-600">
             Mostrando {paginatedProducts.length} de {filteredAndSortedProducts.length} productos

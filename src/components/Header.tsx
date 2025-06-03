@@ -1,8 +1,14 @@
 
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ShoppingCart, Menu, X } from 'lucide-react';
+import { ShoppingCart, Menu, X, ChevronDown } from 'lucide-react';
 import { useCart } from '@/hooks/useCart';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -10,9 +16,12 @@ const Header = () => {
 
   const navigation = [
     { name: 'Inicio', href: '/' },
-    { name: 'Todos los productos', href: '/productos' },
     { name: 'Lanzamientos', href: '/lanzamientos' },
     { name: 'Ofertas', href: '/ofertas' },
+  ];
+
+  const productCategories = [
+    { name: 'Todos', href: '/productos' },
     { name: 'Camisas', href: '/productos?categoria=Camisas' },
     { name: 'Vestidos', href: '/productos?categoria=Vestidos' },
     { name: 'Pantalones', href: '/productos?categoria=Pantalones' },
@@ -40,6 +49,26 @@ const Header = () => {
                 {item.name}
               </Link>
             ))}
+            
+            {/* Products Dropdown */}
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex items-center text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors duration-200 hover:scale-105">
+                Productos
+                <ChevronDown className="ml-1 h-4 w-4" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="bg-white shadow-lg border border-gray-200 rounded-md min-w-[160px] z-50">
+                {productCategories.map((category) => (
+                  <DropdownMenuItem key={category.name} asChild>
+                    <Link
+                      to={category.href}
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 cursor-pointer"
+                    >
+                      {category.name}
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
           </nav>
 
           {/* Cart and Mobile menu button */}
@@ -80,6 +109,21 @@ const Header = () => {
                   {item.name}
                 </Link>
               ))}
+              
+              {/* Mobile Products Section */}
+              <div className="px-3 py-2">
+                <div className="text-base font-medium text-gray-900 mb-2">Productos</div>
+                {productCategories.map((category) => (
+                  <Link
+                    key={category.name}
+                    to={category.href}
+                    className="block pl-4 pr-3 py-2 text-sm text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-colors duration-200"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {category.name}
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
         )}
