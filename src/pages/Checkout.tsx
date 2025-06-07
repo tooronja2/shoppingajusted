@@ -1,233 +1,301 @@
+import React, { useState } from 'react';
+import { useStore } from '../context/StoreContext';
+import { useSecureForm } from '../hooks/useSecureForm';
+import { validateEmail, validatePhone, validateWebhookUrl } from '../utils/security';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
+import { toast } from 'sonner';
 
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useCart } from '@/hooks/useCart';
-import { toast } from '@/hooks/use-toast';
+interface CheckoutForm extends Record<string, string> {
+  nombre: string;
+  email: string;
+  telefono: string;
+  direccion: string;
+  numero: string;
+  piso: string;
+  codigoPostal: string;
+  ciudad: string;
+  provincia: string;
+  pais: string;
+  notas: string;
+}
 
 const Checkout = () => {
-  const { items, getTotalPrice, clearCart } = useCart();
-  const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState({
+  const { cart, config, clearCart, getCartTotal } = useStore();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const validationRules = {
+    nombre: { required: true, minLength: 2, maxLength: 100 },
+    email: { required: true, custom: validateEmail },
+    telefono: { required: true, custom: validatePhone },
+    direccion: { required: true, minLength: 5, maxLength: 200 },
+    numero: { required: true, minLength: 1, maxLength: 10 },
+    codigoPostal: { required: true, minLength: 3, maxLength: 10 },
+    ciudad: { required: true, minLength: 2, maxLength: 100 },
+    provincia: { required: true, minLength: 2, maxLength: 100 },
+    pais: { required: true, minLength: 2, maxLength: 100 }
+  };
+
+  const { formData, errors, updateField, validateForm } = useSecureForm<CheckoutForm>({
     nombre: '',
+    email: '',
     telefono: '',
-    email: ''
-  });
+    direccion: '',
+    numero: '',
+    piso: '',
+    codigoPostal: '',
+    ciudad: '',
+    provincia: '',
+    pais: 'Argentina',
+    notas: ''
+  }, validationRules);
 
-  const formatPrice = (price: number) => {
-    return new Intl.NumberFormat('es-MX', {
-      style: 'currency',
-      currency: 'MXN'
-    }).format(price);
-  };
+  if (!config) return null;
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
+  const cartTotal = getCartTotal();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (!formData.nombre || !formData.telefono) {
-      toast({
-        title: "Campos requeridos",
-        description: "Por favor completa todos los campos obligatorios",
-        variant: "destructive",
-      });
+
+    if (!validateForm()) {
+      toast.error('Por favor completa los campos obligatorios correctamente');
       return;
     }
 
-    setLoading(true);
+    if (cart.length === 0) {
+      toast.error('El carrito está vacío. Agrega productos antes de continuar.');
+      return;
+    }
+
+    setIsLoading(true);
 
     try {
-      // Preparar datos del pedido para enviar al webhook
-      const orderData = {
-        cliente: {
-          nombre: formData.nombre,
-          telefono: formData.telefono,
-          email: formData.email
-        },
-        productos: items.map(item => ({
-          sku: item.product.sku,
-          nombre: item.product.nombre,
-          precio: item.product.precio,
-          cantidad: item.quantity,
-          opciones_seleccionadas: item.selectedOptions,
-          subtotal: item.product.precio * item.quantity
-        })),
-        resumen: {
-          total_productos: items.length,
-          total_cantidad: items.reduce((sum, item) => sum + item.quantity, 0),
-          total_precio: getTotalPrice()
-        },
-        fecha_pedido: new Date().toISOString()
-      };
-
-      console.log('Datos del pedido preparados:', orderData);
-
-      // TODO: Aquí se enviará al webhook de n8n cuando esté disponible
-      // const response = await fetch('URL_DEL_WEBHOOK_N8N', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify(orderData),
-      // });
-
-      // Simular envío exitoso por ahora
+      // Simulate order submission
       await new Promise(resolve => setTimeout(resolve, 2000));
 
-      toast({
-        title: "¡Pedido realizado con éxito!",
-        description: "Te contactaremos pronto por WhatsApp para confirmar tu pedido",
-      });
-
+      // Clear cart after successful submission
       clearCart();
-      navigate('/');
+
+      toast.success('¡Pedido realizado con éxito! Redirigiendo a la página de confirmación...');
+
+      // Redirect to order confirmation page
+      window.location.href = '/pedido-confirmado';
 
     } catch (error) {
       console.error('Error al procesar el pedido:', error);
-      toast({
-        title: "Error al procesar el pedido",
-        description: "Por favor intenta nuevamente o contacta con soporte",
-        variant: "destructive",
-      });
+      toast.error('Error al procesar el pedido. Por favor intenta nuevamente.');
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
-  if (items.length === 0) {
-    return (
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="text-center">
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">No hay productos en el carrito</h1>
-          <p className="text-gray-600 mb-8">Agrega algunos productos antes de proceder al checkout.</p>
-          <button
-            onClick={() => navigate('/productos')}
-            className="bg-gray-900 text-white px-8 py-3 rounded-md font-semibold hover:bg-gray-800 transition-colors"
-          >
-            Explorar Productos
-          </button>
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <h1 className="text-3xl font-bold text-gray-900 mb-8">Finalizar Pedido</h1>
+    <div className="min-h-screen bg-gray-50">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">Checkout</h1>
+        <p className="text-gray-600 mb-8">Completa tus datos para finalizar la compra.</p>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Formulario de datos del cliente */}
-        <div>
-          <h2 className="text-xl font-semibold text-gray-900 mb-6">Información de Contacto</h2>
-          
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <label htmlFor="nombre" className="block text-sm font-medium text-gray-700 mb-2">
-                Nombre Completo *
-              </label>
-              <input
-                type="text"
-                id="nombre"
-                name="nombre"
-                value={formData.nombre}
-                onChange={handleInputChange}
-                required
-                className="w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500"
-                placeholder="Tu nombre completo"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="telefono" className="block text-sm font-medium text-gray-700 mb-2">
-                Número de WhatsApp *
-              </label>
-              <input
-                type="tel"
-                id="telefono"
-                name="telefono"
-                value={formData.telefono}
-                onChange={handleInputChange}
-                required
-                className="w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500"
-                placeholder="+52 55 1234 5678"
-              />
-              <p className="text-sm text-gray-500 mt-1">
-                Te contactaremos por WhatsApp para confirmar tu pedido
-              </p>
-            </div>
-
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                Email (opcional)
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                className="w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500"
-                placeholder="tu@email.com"
-              />
-            </div>
-
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full bg-gray-900 text-white py-3 px-6 rounded-md font-semibold hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed hover-scale"
-            >
-              {loading ? 'Procesando...' : 'Confirmar Pedido'}
-            </button>
-          </form>
-        </div>
-
-        {/* Resumen del pedido */}
-        <div>
-          <h2 className="text-xl font-semibold text-gray-900 mb-6">Resumen del Pedido</h2>
-          
-          <div className="bg-gray-50 rounded-lg p-6 space-y-4">
-            {items.map((item) => (
-              <div key={`${item.product.sku}-${JSON.stringify(item.selectedOptions)}`} className="flex justify-between items-start">
-                <div className="flex-1">
-                  <h4 className="font-medium text-gray-900">{item.product.nombre}</h4>
-                  <p className="text-sm text-gray-600">Cantidad: {item.quantity}</p>
-                  {Object.entries(item.selectedOptions).map(([key, value]) => (
-                    <p key={key} className="text-sm text-gray-500">
-                      <span className="capitalize">{key}:</span> {value}
-                    </p>
-                  ))}
+        <Card>
+          <CardHeader>
+            <CardTitle>Información de Contacto y Envío</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <Label htmlFor="nombre">Nombre *</Label>
+                  <Input
+                    id="nombre"
+                    type="text"
+                    value={formData.nombre}
+                    onChange={(e) => updateField('nombre', e.target.value)}
+                    className={errors.nombre ? 'border-red-500' : ''}
+                    placeholder="Tu nombre"
+                    required
+                  />
+                  {errors.nombre && (
+                    <p className="text-red-500 text-sm mt-1">{errors.nombre}</p>
+                  )}
                 </div>
-                <p className="font-semibold text-gray-900">
-                  {formatPrice(item.product.precio * item.quantity)}
-                </p>
-              </div>
-            ))}
-            
-            <div className="border-t border-gray-200 pt-4">
-              <div className="flex justify-between text-lg font-semibold">
-                <span>Total</span>
-                <span>{formatPrice(getTotalPrice())}</span>
-              </div>
-            </div>
-          </div>
 
-          <div className="mt-6 p-4 bg-blue-50 rounded-lg">
-            <h3 className="font-medium text-blue-900 mb-2">Proceso de Compra</h3>
-            <ol className="text-sm text-blue-800 space-y-1">
-              <li>1. Completa tus datos de contacto</li>
-              <li>2. Confirma tu pedido</li>
-              <li>3. Te contactaremos por WhatsApp</li>
-              <li>4. Coordinaremos entrega y pago</li>
-            </ol>
-          </div>
-        </div>
+                <div>
+                  <Label htmlFor="email">Email *</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={(e) => updateField('email', e.target.value)}
+                    className={errors.email ? 'border-red-500' : ''}
+                    placeholder="tu@email.com"
+                    required
+                  />
+                  {errors.email && (
+                    <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                  )}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <Label htmlFor="telefono">Teléfono *</Label>
+                  <Input
+                    id="telefono"
+                    type="tel"
+                    value={formData.telefono}
+                    onChange={(e) => updateField('telefono', e.target.value)}
+                    className={errors.telefono ? 'border-red-500' : ''}
+                    placeholder="Tu teléfono"
+                    required
+                  />
+                  {errors.telefono && (
+                    <p className="text-red-500 text-sm mt-1">{errors.telefono}</p>
+                  )}
+                </div>
+
+                <div>
+                  <Label htmlFor="direccion">Dirección *</Label>
+                  <Input
+                    id="direccion"
+                    type="text"
+                    value={formData.direccion}
+                    onChange={(e) => updateField('direccion', e.target.value)}
+                    className={errors.direccion ? 'border-red-500' : ''}
+                    placeholder="Calle y número"
+                    required
+                  />
+                  {errors.direccion && (
+                    <p className="text-red-500 text-sm mt-1">{errors.direccion}</p>
+                  )}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-3 gap-4">
+                <div>
+                  <Label htmlFor="numero">Número *</Label>
+                  <Input
+                    id="numero"
+                    type="text"
+                    value={formData.numero}
+                    onChange={(e) => updateField('numero', e.target.value)}
+                    className={errors.numero ? 'border-red-500' : ''}
+                    placeholder="Número"
+                    required
+                  />
+                  {errors.numero && (
+                    <p className="text-red-500 text-sm mt-1">{errors.numero}</p>
+                  )}
+                </div>
+
+                <div>
+                  <Label htmlFor="piso">Piso</Label>
+                  <Input
+                    id="piso"
+                    type="text"
+                    value={formData.piso}
+                    onChange={(e) => updateField('piso', e.target.value)}
+                    placeholder="Piso (opcional)"
+                  />
+                </div>
+
+                <div>
+                  <Label htmlFor="codigoPostal">Código Postal *</Label>
+                  <Input
+                    id="codigoPostal"
+                    type="text"
+                    value={formData.codigoPostal}
+                    onChange={(e) => updateField('codigoPostal', e.target.value)}
+                    className={errors.codigoPostal ? 'border-red-500' : ''}
+                    placeholder="Código Postal"
+                    required
+                  />
+                  {errors.codigoPostal && (
+                    <p className="text-red-500 text-sm mt-1">{errors.codigoPostal}</p>
+                  )}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <Label htmlFor="ciudad">Ciudad *</Label>
+                  <Input
+                    id="ciudad"
+                    type="text"
+                    value={formData.ciudad}
+                    onChange={(e) => updateField('ciudad', e.target.value)}
+                    className={errors.ciudad ? 'border-red-500' : ''}
+                    placeholder="Ciudad"
+                    required
+                  />
+                  {errors.ciudad && (
+                    <p className="text-red-500 text-sm mt-1">{errors.ciudad}</p>
+                  )}
+                </div>
+
+                <div>
+                  <Label htmlFor="provincia">Provincia *</Label>
+                  <Input
+                    id="provincia"
+                    type="text"
+                    value={formData.provincia}
+                    onChange={(e) => updateField('provincia', e.target.value)}
+                    className={errors.provincia ? 'border-red-500' : ''}
+                    placeholder="Provincia"
+                    required
+                  />
+                  {errors.provincia && (
+                    <p className="text-red-500 text-sm mt-1">{errors.provincia}</p>
+                  )}
+                </div>
+              </div>
+
+              <div>
+                <Label htmlFor="pais">País *</Label>
+                <Input
+                  id="pais"
+                  type="text"
+                  value={formData.pais}
+                  onChange={(e) => updateField('pais', e.target.value)}
+                  className={errors.pais ? 'border-red-500' : ''}
+                  placeholder="País"
+                  required
+                />
+                {errors.pais && (
+                  <p className="text-red-500 text-sm mt-1">{errors.pais}</p>
+                )}
+              </div>
+
+              <div>
+                <Label htmlFor="notas">Notas Adicionales</Label>
+                <Textarea
+                  id="notas"
+                  value={formData.notas}
+                  onChange={(e) => updateField('notas', e.target.value)}
+                  placeholder="¿Alguna indicación especial para el envío?"
+                  rows={3}
+                />
+              </div>
+
+              <Separator className="my-4" />
+
+              <div className="flex justify-between items-center">
+                <div className="text-lg font-semibold">
+                  Total: {config.moneda_simbolo} {cartTotal.toFixed(2)}
+                </div>
+                <Button
+                  type="submit"
+                  className="bg-black hover:bg-gray-800 text-white"
+                  disabled={isLoading}
+                >
+                  {isLoading ? 'Procesando...' : 'Finalizar Compra'}
+                </Button>
+              </div>
+            </form>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );

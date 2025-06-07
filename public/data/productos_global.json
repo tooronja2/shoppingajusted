@@ -1,113 +1,190 @@
 
 [
   {
-    "sku": "SKU001",
-    "nombre": "Camisa de Lino Blanca Premium",
-    "categoria": "Camisas",
-    "precio": 2999.99,
-    "descripcion_corta": "Fresca y elegante, ideal para verano.",
-    "descripcion_larga": "Confeccionada con lino 100% natural de la más alta calidad. Esta camisa combina comodidad y elegancia, perfecta para ocasiones especiales o uso diario. Su tejido transpirable y su corte moderno la convierten en una pieza esencial del guardarropa.",
+    "sku": "LUX001",
+    "nombre": "Vestido Midi Elegante Negro",
+    "categoria_slug": "vestidos",
+    "genero": "mujer",
+    "marca": "LUXE Signature",
+    "precio_original": 12999.99,
+    "precio_oferta": 9999.99,
+    "en_oferta": true,
+    "porcentaje_descuento": 23,
+    "descripcion_corta": "Vestido midi elegante perfecto para ocasiones especiales.",
+    "descripcion_larga": "Confeccionado en tela premium con corte midi que estiliza la figura. Diseño atemporal que combina elegancia y comodidad. Ideal para eventos, cenas especiales o reuniones importantes.",
     "fotos": [
-      "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=800&h=1000&fit=crop",
-      "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=800&h=1000&fit=crop"
-    ],
-    "disponible": true,
-    "cantidad_stock": 50,
-    "detalles": {
-      "talla": ["S", "M", "L", "XL"],
-      "color": "Blanco",
-      "material": "Lino 100%"
-    },
-    "fecha_agregado": "2025-06-03T10:00:00Z",
-    "slug_url_producto": "camisa-lino-blanca-premium"
-  },
-  {
-    "sku": "SKU002",
-    "nombre": "Vestido Floral de Verano",
-    "categoria": "Vestidos",
-    "precio": 4299.99,
-    "descripcion_corta": "Vestido ligero con estampado floral único.",
-    "descripcion_larga": "Un hermoso vestido de verano con estampado floral exclusivo. Confeccionado en algodón suave y transpirable, perfecto para días soleados. Su corte favorecedor y longitud midi lo hacen ideal para múltiples ocasiones.",
-    "fotos": [
-      "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800&h=1000&fit=crop",
-      "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=800&h=1000&fit=crop"
+      "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=800&h=800&fit=crop",
+      "https://images.unsplash.com/photo-1566479179817-c0a2e3a68e1b?w=800&h=800&fit=crop"
     ],
     "disponible": true,
     "cantidad_stock": 25,
     "detalles": {
-      "talla": ["XS", "S", "M", "L"],
-      "color": "Multicolor",
-      "material": "Algodón",
-      "largo": "Midi"
+      "tallas_disponibles": ["XS", "S", "M", "L", "XL"],
+      "colores_disponibles": [
+        {"nombre": "Negro", "hex": "#000000"},
+        {"nombre": "Azul Marino", "hex": "#001f3f"}
+      ],
+      "material": "95% Poliéster, 5% Elastano",
+      "cuidados": "Lavar en seco o a máquina en ciclo delicado."
     },
-    "fecha_agregado": "2025-06-02T15:30:00Z",
-    "slug_url_producto": "vestido-floral-verano"
+    "fecha_agregado": "2024-01-15T10:00:00Z",
+    "slug_url_producto": "vestido-midi-elegante-negro",
+    "etiquetas": ["elegante", "ocasion-especial", "popular", "nueva-coleccion"]
   },
   {
-    "sku": "SKU003",
-    "nombre": "Pantalón Denim Clásico",
-    "categoria": "Pantalones",
-    "precio": 3599.99,
-    "descripcion_corta": "Denim de alta calidad con corte moderno.",
-    "descripcion_larga": "Pantalón de denim clásico confeccionado con algodón premium. Su corte moderno y versátil se adapta a cualquier ocasión. Disponible en múltiples tallas con un ajuste perfecto que resalta la silueta.",
+    "sku": "LUX002",
+    "nombre": "Camisa Oxford Premium Blanca",
+    "categoria_slug": "camisas",
+    "genero": "hombre",
+    "marca": "LUXE Men",
+    "precio_original": 8999.99,
+    "precio_oferta": null,
+    "en_oferta": false,
+    "porcentaje_descuento": 0,
+    "descripcion_corta": "Camisa oxford de corte clásico en algodón premium.",
+    "descripcion_larga": "Camisa oxford confeccionada en algodón 100% de primera calidad. Corte regular que se adapta cómodamente al cuerpo. Perfecta para el trabajo o eventos formales.",
     "fotos": [
-      "https://images.unsplash.com/photo-1542272604-787c3835535d?w=800&h=1000&fit=crop",
-      "https://images.unsplash.com/photo-1475178626620-a4d074967452?w=800&h=1000&fit=crop"
-    ],
-    "disponible": true,
-    "cantidad_stock": 35,
-    "detalles": {
-      "talla": ["28", "30", "32", "34", "36"],
-      "color": "Azul índigo",
-      "material": "Denim",
-      "corte": "Slim fit"
-    },
-    "fecha_agregado": "2025-06-01T08:00:00Z",
-    "slug_url_producto": "pantalon-denim-clasico"
-  },
-  {
-    "sku": "SKU004",
-    "nombre": "Blazer Negro Elegante",
-    "categoria": "Blazers",
-    "precio": 5999.99,
-    "descripcion_corta": "Blazer sofisticado para ocasiones especiales.",
-    "descripcion_larga": "Blazer elegante en color negro, confeccionado con materiales de primera calidad. Su corte entallado y acabados impecables lo convierten en la pieza perfecta para eventos formales o para elevar cualquier look casual.",
-    "fotos": [
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=1000&fit=crop",
-      "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=800&h=1000&fit=crop"
-    ],
-    "disponible": false,
-    "cantidad_stock": 0,
-    "detalles": {
-      "talla": ["S", "M", "L", "XL"],
-      "color": "Negro",
-      "material": "Poliéster y Lana",
-      "ocasion": "Formal"
-    },
-    "fecha_agregado": "2025-05-30T12:00:00Z",
-    "slug_url_producto": "blazer-negro-elegante"
-  },
-  {
-    "sku": "SKU005",
-    "nombre": "Falda Midi Rosa",
-    "categoria": "Faldas",
-    "precio": 2799.99,
-    "descripcion_corta": "Falda midi en tono rosa suave y romántico.",
-    "descripcion_larga": "Falda midi de corte A en un hermoso tono rosa. Confeccionada en tejido fluido que crea un movimiento elegante al caminar. Perfecta para combinar con blusas o camisetas, ideal para looks tanto casuales como semi-formales.",
-    "fotos": [
-      "https://images.unsplash.com/photo-1583496661160-fb5886a13d44?w=800&h=1000&fit=crop",
-      "https://images.unsplash.com/photo-1594834894748-2d22b2e0486a?w=800&h=1000&fit=crop"
+      "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=800&h=800&fit=crop",
+      "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=800&h=800&fit=crop"
     ],
     "disponible": true,
     "cantidad_stock": 40,
     "detalles": {
-      "talla": ["XS", "S", "M", "L", "XL"],
-      "color": "Rosa",
-      "material": "Poliéster",
-      "largo": "Midi",
-      "corte": "A-line"
+      "tallas_disponibles": ["S", "M", "L", "XL", "XXL"],
+      "colores_disponibles": [
+        {"nombre": "Blanco", "hex": "#FFFFFF"},
+        {"nombre": "Celeste", "hex": "#ADD8E6"}
+      ],
+      "material": "100% Algodón Oxford",
+      "cuidados": "Lavar a máquina a 30°C. Planchar a temperatura media."
     },
-    "fecha_agregado": "2025-05-28T16:45:00Z",
-    "slug_url_producto": "falda-midi-rosa"
+    "fecha_agregado": "2024-01-20T14:00:00Z",
+    "slug_url_producto": "camisa-oxford-premium-blanca",
+    "etiquetas": ["clasico", "formal", "algodon", "popular"]
+  },
+  {
+    "sku": "LUX003",
+    "nombre": "Blusa Satén Dorada",
+    "categoria_slug": "blusas",
+    "genero": "mujer",
+    "marca": "LUXE Femme",
+    "precio_original": 7999.99,
+    "precio_oferta": 5999.99,
+    "en_oferta": true,
+    "porcentaje_descuento": 25,
+    "descripcion_corta": "Blusa en satén con acabado dorado, perfecta para la noche.",
+    "descripcion_larga": "Elegante blusa confeccionada en satén de alta calidad con sutil brillo dorado. Diseño sofisticado que aporta glamour a cualquier look nocturno.",
+    "fotos": [
+      "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=800&h=800&fit=crop",
+      "https://images.unsplash.com/photo-1571945153237-4929e783af4a?w=800&h=800&fit=crop"
+    ],
+    "disponible": true,
+    "cantidad_stock": 15,
+    "detalles": {
+      "tallas_disponibles": ["XS", "S", "M", "L"],
+      "colores_disponibles": [
+        {"nombre": "Dorado", "hex": "#FFD700"},
+        {"nombre": "Champagne", "hex": "#F7E7CE"}
+      ],
+      "material": "92% Poliéster, 8% Seda",
+      "cuidados": "Lavar en seco únicamente."
+    },
+    "fecha_agregado": "2024-02-01T09:00:00Z",
+    "slug_url_producto": "blusa-saten-dorada",
+    "etiquetas": ["glamour", "noche", "oferta", "nueva-coleccion"]
+  },
+  {
+    "sku": "LUX004",
+    "nombre": "Pantalón Chino Beige",
+    "categoria_slug": "pantalones",
+    "genero": "hombre",
+    "marca": "LUXE Men",
+    "precio_original": 6999.99,
+    "precio_oferta": null,
+    "en_oferta": false,
+    "porcentaje_descuento": 0,
+    "descripcion_corta": "Pantalón chino de corte moderno en color beige versátil.",
+    "descripcion_larga": "Pantalón chino confeccionado en algodón premium con corte moderno slim fit. Color beige versátil que combina perfectamente con cualquier camisa o polo.",
+    "fotos": [
+      "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=800&h=800&fit=crop",
+      "https://images.unsplash.com/photo-1506629905327-b73f0ff2c7fe?w=800&h=800&fit=crop"
+    ],
+    "disponible": true,
+    "cantidad_stock": 30,
+    "detalles": {
+      "tallas_disponibles": ["30", "32", "34", "36", "38", "40"],
+      "colores_disponibles": [
+        {"nombre": "Beige", "hex": "#F5F5DC"},
+        {"nombre": "Azul Marino", "hex": "#001f3f"}
+      ],
+      "material": "98% Algodón, 2% Elastano",
+      "cuidados": "Lavar a máquina a 30°C. No usar blanqueador."
+    },
+    "fecha_agregado": "2024-02-05T11:00:00Z",
+    "slug_url_producto": "pantalon-chino-beige",
+    "etiquetas": ["casual", "versatil", "algodon", "nueva-coleccion"]
+  },
+  {
+    "sku": "LUX005",
+    "nombre": "Jeans Skinny Azul Oscuro",
+    "categoria_slug": "pantalones",
+    "genero": "mujer",
+    "marca": "LUXE Denim",
+    "precio_original": 9999.99,
+    "precio_oferta": 7999.99,
+    "en_oferta": true,
+    "porcentaje_descuento": 20,
+    "descripcion_corta": "Jeans skinny de tiro medio en denim premium azul oscuro.",
+    "descripcion_larga": "Jeans skinny confeccionados en denim premium de alta calidad. Tiro medio y corte que estiliza la figura. El color azul oscuro es versátil y atemporal.",
+    "fotos": [
+      "https://images.unsplash.com/photo-1582418702059-97ebafb35d09?w=800&h=800&fit=crop",
+      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=800&fit=crop"
+    ],
+    "disponible": true,
+    "cantidad_stock": 35,
+    "detalles": {
+      "tallas_disponibles": ["25", "26", "27", "28", "29", "30", "31"],
+      "colores_disponibles": [
+        {"nombre": "Azul Oscuro", "hex": "#191970"},
+        {"nombre": "Negro", "hex": "#000000"}
+      ],
+      "material": "75% Algodón, 23% Poliéster, 2% Elastano",
+      "cuidados": "Lavar del revés en agua fría. No usar blanqueador."
+    },
+    "fecha_agregado": "2024-02-10T16:00:00Z",
+    "slug_url_producto": "jeans-skinny-azul-oscuro",
+    "etiquetas": ["denim", "casual", "oferta", "popular"]
+  },
+  {
+    "sku": "LUX006",
+    "nombre": "Polo Classic Fit Rojo",
+    "categoria_slug": "polos",
+    "genero": "hombre",
+    "marca": "LUXE Sport",
+    "precio_original": 4999.99,
+    "precio_oferta": null,
+    "en_oferta": false,
+    "porcentaje_descuento": 0,
+    "descripcion_corta": "Polo clásico de algodón piqué en vibrante color rojo.",
+    "descripcion_larga": "Polo confeccionado en algodón piqué de alta calidad con corte classic fit. Color rojo vibrante que aporta frescura y estilo casual elegante.",
+    "fotos": [
+      "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=800&h=800&fit=crop",
+      "https://images.unsplash.com/photo-1571945153237-4929e783af4a?w=800&h=800&fit=crop"
+    ],
+    "disponible": true,
+    "cantidad_stock": 45,
+    "detalles": {
+      "tallas_disponibles": ["S", "M", "L", "XL", "XXL"],
+      "colores_disponibles": [
+        {"nombre": "Rojo", "hex": "#DC143C"},
+        {"nombre": "Azul Marino", "hex": "#001f3f"},
+        {"nombre": "Blanco", "hex": "#FFFFFF"}
+      ],
+      "material": "100% Algodón Piqué",
+      "cuidados": "Lavar a máquina a 30°C. Planchar a temperatura baja."
+    },
+    "fecha_agregado": "2024-02-12T13:00:00Z",
+    "slug_url_producto": "polo-classic-fit-rojo",
+    "etiquetas": ["casual", "sport", "algodon", "nueva-coleccion"]
   }
 ]

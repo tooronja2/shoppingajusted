@@ -1,133 +1,215 @@
 
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { ShoppingCart, Menu, X, ChevronDown } from 'lucide-react';
-import { useCart } from '@/hooks/useCart';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { ShoppingBag, Search, Menu, X, User, Phone } from 'lucide-react';
+import { useStore } from '../context/StoreContext';
+import { Button } from '@/components/ui/button';
+import { useMagneticEffect } from '../hooks/useScrollAnimation';
 
 const Header = () => {
+  const { config, getCartItemsCount } = useStore();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { getTotalItems } = useCart();
+  const [searchQuery, setSearchQuery] = useState('');
+  const [scrolled, setScrolled] = useState(false);
+  const navigate = useNavigate();
+  const cartItemsCount = getCartItemsCount();
+  const logoRef = useMagneticEffect();
 
-  const navigation = [
-    { name: 'Inicio', href: '/' },
-    { name: 'Lanzamientos', href: '/lanzamientos' },
-    { name: 'Ofertas', href: '/ofertas' },
-  ];
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
 
-  const productCategories = [
-    { name: 'Todos', href: '/productos' },
-    { name: 'Camisas', href: '/productos?categoria=Camisas' },
-    { name: 'Vestidos', href: '/productos?categoria=Vestidos' },
-    { name: 'Pantalones', href: '/productos?categoria=Pantalones' },
-  ];
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/productos?buscar=${encodeURIComponent(searchQuery.trim())}`);
+      setSearchQuery('');
+    }
+  };
+
+  if (!config) return null;
+
+  console.log('Header - config.links_redes_sociales:', config.links_redes_sociales);
 
   return (
-    <header className="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <Link to="/" className="flex-shrink-0">
-            <h1 className="text-2xl font-bold text-gray-900 tracking-tight">
-              Eleganza
-            </h1>
-          </Link>
+    <header className={`bg-white border-b border-gray-100 sticky top-0 z-50 transition-all duration-300 ${
+      scrolled ? 'shadow-lg backdrop-blur-md bg-white/95' : 'shadow-sm'
+    }`}>
+      {/* Top bar with contact info */}
+      <div className="bg-black text-white py-2 px-4 overflow-hidden relative">
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-900/20 to-blue-900/20"></div>
+        <div className="max-w-7xl mx-auto flex justify-between items-center text-sm relative z-10">
+          <div className="flex items-center gap-4">
+            <span className="flex items-center gap-2 hover:text-purple-300 transition-colors">
+              <Phone className="w-4 h-4 animate-pulse" />
+              {config.telefono_contacto_visible}
+            </span>
+            <span className="hidden md:block hover:text-purple-300 transition-colors">{config.email_contacto_principal}</span>
+          </div>
+          <div className="flex items-center gap-4">
+            {config.links_redes_sociales?.instagram && (
+              <a href={config.links_redes_sociales.instagram} target="_blank" rel="noopener noreferrer" 
+                 className="hover:text-purple-300 transition-all duration-300 hover:scale-110">
+                Instagram
+              </a>
+            )}
+            {config.links_redes_sociales?.facebook && (
+              <a href={config.links_redes_sociales.facebook} target="_blank" rel="noopener noreferrer" 
+                 className="hover:text-purple-300 transition-all duration-300 hover:scale-110">
+                Facebook
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-8">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                to={item.href}
-                className="text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors duration-200 hover:scale-105"
+      {/* Main header */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16 gap-4">
+          {/* Logo with improved spacing */}
+          <div className="flex-shrink-0">
+            <Link to="/" className="flex items-center">
+              <h1 
+                ref={logoRef as React.RefObject<HTMLHeadingElement>}
+                className="text-xl md:text-2xl font-bold text-primary gradient-text hover:scale-105 transition-all duration-300 whitespace-nowrap"
               >
-                {item.name}
-              </Link>
+                {config.nombre_tienda}
+              </h1>
+            </Link>
+          </div>
+
+          {/* Desktop Navigation with better spacing */}
+          <nav className="hidden lg:flex items-center space-x-6 xl:space-x-8 flex-1 justify-center">
+            {(config.menu_navegacion_principal || []).map((item, index) => (
+              <div key={index} className="relative group">
+                <Link
+                  to={item.url}
+                  className="text-foreground/80 hover:text-foreground transition-all duration-300 font-medium text-sm xl:text-base relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-primary after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left whitespace-nowrap"
+                >
+                  {item.texto}
+                </Link>
+                {item.subcategorias && Array.isArray(item.subcategorias) && (
+                  <div className="absolute top-full left-0 mt-2 w-48 glass-morphism shadow-lg border border-border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 rounded-lg">
+                    {item.subcategorias.map((subitem, subindex) => (
+                      <Link
+                        key={subindex}
+                        to={subitem.url}
+                        className="block px-4 py-2 text-foreground/80 hover:bg-muted hover:text-foreground transition-all duration-200 first:rounded-t-lg last:rounded-b-lg text-sm"
+                      >
+                        {subitem.texto}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
             ))}
-            
-            {/* Products Dropdown */}
-            <DropdownMenu>
-              <DropdownMenuTrigger className="flex items-center text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors duration-200 hover:scale-105">
-                Productos
-                <ChevronDown className="ml-1 h-4 w-4" />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-white shadow-lg border border-gray-200 rounded-md min-w-[160px] z-50">
-                {productCategories.map((category) => (
-                  <DropdownMenuItem key={category.name} asChild>
-                    <Link
-                      to={category.href}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 cursor-pointer"
-                    >
-                      {category.name}
-                    </Link>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
           </nav>
 
-          {/* Cart and Mobile menu button */}
-          <div className="flex items-center space-x-4">
-            <Link
-              to="/carrito"
-              className="relative p-2 text-gray-700 hover:text-gray-900 transition-colors duration-200 hover-scale"
-            >
-              <ShoppingCart className="h-6 w-6" />
-              {getTotalItems() > 0 && (
-                <span className="absolute -top-1 -right-1 bg-gray-900 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center animate-scale-in">
-                  {getTotalItems()}
-                </span>
-              )}
+          {/* Search bar - hidden on smaller screens to save space */}
+          <form onSubmit={handleSearch} className="hidden xl:flex items-center w-full max-w-xs">
+            <div className="relative w-full group">
+              <input
+                type="text"
+                placeholder="Buscar productos..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full px-4 py-2 border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent transition-all duration-300 group-hover:shadow-md bg-background text-foreground placeholder:text-muted-foreground"
+              />
+              <button
+                type="submit"
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground transition-all duration-300 hover:scale-110"
+              >
+                <Search className="w-5 h-5" />
+              </button>
+            </div>
+          </form>
+
+          {/* Right side icons */}
+          <div className="flex items-center space-x-2 md:space-x-4 flex-shrink-0">
+            <Button variant="ghost" size="sm" className="hidden md:flex magnetic-button hover-lift">
+              <User className="w-5 h-5" />
+            </Button>
+            
+            <Link to="/carrito" className="relative">
+              <Button variant="ghost" size="sm" className="magnetic-button hover-lift">
+                <ShoppingBag className="w-5 h-5" />
+                {cartItemsCount > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs rounded-full w-5 h-5 flex items-center justify-center animate-pulse">
+                    {cartItemsCount}
+                  </span>
+                )}
+              </Button>
             </Link>
 
             {/* Mobile menu button */}
-            <button
+            <Button
+              variant="ghost"
+              size="sm"
+              className="lg:hidden magnetic-button"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden p-2 text-gray-700 hover:text-gray-900"
             >
-              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </button>
+              {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </Button>
           </div>
         </div>
 
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="md:hidden animate-fade-in">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-white border-t border-gray-100">
-              {navigation.map((item) => (
+        {/* Mobile/Tablet search - shown on medium and smaller screens */}
+        <div className="xl:hidden pb-4">
+          <form onSubmit={handleSearch} className="relative">
+            <input
+              type="text"
+              placeholder="Buscar productos..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full px-4 py-2 border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent transition-all duration-300 bg-background text-foreground placeholder:text-muted-foreground"
+            />
+            <button
+              type="submit"
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground transition-all duration-300 hover:scale-110"
+            >
+              <Search className="w-5 h-5" />
+            </button>
+          </form>
+        </div>
+      </div>
+
+      {/* Mobile menu */}
+      {isMenuOpen && (
+        <div className="lg:hidden bg-background border-t border-border glass-morphism">
+          <div className="px-4 py-4 space-y-2">
+            {(config.menu_navegacion_principal || []).map((item, index) => (
+              <div key={index} className="animate-fade-in-up" style={{ animationDelay: `${index * 100}ms` }}>
                 <Link
-                  key={item.name}
-                  to={item.href}
-                  className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-colors duration-200"
+                  to={item.url}
+                  className="block py-2 text-foreground/80 hover:text-foreground font-medium transition-all duration-300 hover:translate-x-2"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  {item.name}
+                  {item.texto}
                 </Link>
-              ))}
-              
-              {/* Mobile Products Section */}
-              <div className="px-3 py-2">
-                <div className="text-base font-medium text-gray-900 mb-2">Productos</div>
-                {productCategories.map((category) => (
-                  <Link
-                    key={category.name}
-                    to={category.href}
-                    className="block pl-4 pr-3 py-2 text-sm text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-colors duration-200"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {category.name}
-                  </Link>
-                ))}
+                {item.subcategorias && Array.isArray(item.subcategorias) && (
+                  <div className="pl-4 space-y-1">
+                    {item.subcategorias.map((subitem, subindex) => (
+                      <Link
+                        key={subindex}
+                        to={subitem.url}
+                        className="block py-1 text-foreground/60 hover:text-foreground text-sm transition-all duration-300 hover:translate-x-2"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        {subitem.texto}
+                      </Link>
+                    ))}
+                  </div>
+                )}
               </div>
-            </div>
+            ))}
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </header>
   );
 };

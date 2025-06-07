@@ -1,0 +1,64 @@
+
+{
+  "nombre_tienda": "LUXE Fashion",
+  "meta_titulo_principal": "LUXE Fashion - Ropa Premium Online",
+  "meta_descripcion_principal": "Descubre las últimas tendencias en moda premium. Calidad excepcional, diseños únicos.",
+  "logo_url": "/assets/logos/logo_principal.png",
+  "favicon_url": "/assets/logos/favicon.ico",
+  "telefono_contacto_visible": "+1-555-0123",
+  "email_contacto_principal": "hola@luxefashion.com",
+  "direccion_fisica_opcional": "Av. Moda 123, Centro Comercial Elite",
+  "banner_principal_home": {
+    "activo": true,
+    "imagen_url_desktop": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1920&h=800&fit=crop",
+    "imagen_url_mobile": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=600&fit=crop",
+    "alt_text": "Colección Premium 2024",
+    "titulo_superpuesto": "NUEVA COLECCIÓN",
+    "subtitulo_superpuesto": "Elegancia redefinida - Hasta 40% OFF",
+    "texto_boton": "EXPLORAR AHORA",
+    "link_boton": "/productos?etiquetas=nueva-coleccion"
+  },
+  "secciones_home_destacadas": [
+    {"titulo_seccion": "Últimas Novedades", "criterio_productos": "ordenar_por_fecha_desc", "limite": 8},
+    {"titulo_seccion": "Lo Más Vendido", "criterio_productos": "filtrar_por_etiqueta_popular", "limite": 4}
+  ],
+  "texto_footer_copyright": "© 2024 LUXE Fashion. Todos los derechos reservados.",
+  "links_redes_sociales": {
+    "instagram": "https://instagram.com/luxefashion",
+    "facebook": "https://facebook.com/luxefashion",
+    "tiktok": "https://tiktok.com/@luxefashion"
+  },
+  "menu_navegacion_principal": [
+    {"texto": "Inicio", "url": "/"},
+    {
+      "texto": "Mujer", 
+      "url": "/productos?genero=mujer", 
+      "subcategorias": [
+        {"texto": "Vestidos", "url": "/productos?genero=mujer&categoria=vestidos"},
+        {"texto": "Blusas", "url": "/productos?genero=mujer&categoria=blusas"},
+        {"texto": "Pantalones", "url": "/productos?genero=mujer&categoria=pantalones"},
+        {"texto": "Accesorios", "url": "/productos?genero=mujer&categoria=accesorios"}
+      ]
+    },
+    {
+      "texto": "Hombre", 
+      "url": "/productos?genero=hombre",
+      "subcategorias": [
+        {"texto": "Camisas", "url": "/productos?genero=hombre&categoria=camisas"},
+        {"texto": "Pantalones", "url": "/productos?genero=hombre&categoria=pantalones"},
+        {"texto": "Polos", "url": "/productos?genero=hombre&categoria=polos"},
+        {"texto": "Accesorios", "url": "/productos?genero=hombre&categoria=accesorios"}
+      ]
+    },
+    {"texto": "Ofertas", "url": "/productos?etiquetas=oferta"},
+    {"texto": "Contacto", "url": "/contacto"}
+  ],
+  "footer_links_ayuda": [
+    {"texto": "Preguntas Frecuentes", "url": "/faq"},
+    {"texto": "Políticas de Envío", "url": "/politicas-envio"},
+    {"texto": "Cambios y Devoluciones", "url": "/cambios-devoluciones"},
+    {"texto": "Guía de Talles", "url": "/guia-talles"}
+  ],
+  "moneda_simbolo": "$",
+  "whatsapp_numero_consultas": "+1-555-0123"
+}
