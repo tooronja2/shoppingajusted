@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ShoppingBag, Search, Menu, X, User, Phone, ChevronDown } from 'lucide-react';
@@ -194,9 +193,6 @@ const Header = () => {
 
           {/* Right side icons */}
           <div className="flex items-center space-x-2 md:space-x-4 flex-shrink-0">
-            <Button variant="ghost" size="sm" className="hidden md:flex magnetic-button hover-lift">
-              <User className="w-5 h-5" />
-            </Button>
             
             <Link to="/carrito" className="relative">
               <Button variant="ghost" size="sm" className="magnetic-button hover-lift">
