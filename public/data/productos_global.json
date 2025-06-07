@@ -1,4 +1,3 @@
-
 [
   {
     "sku": "LUX001",
@@ -7,9 +6,9 @@
     "genero": "mujer",
     "marca": "LUXE Signature",
     "precio_original": 12999.99,
-    "precio_oferta": 9999.99,
+    "precio_oferta": 8999.99,
     "en_oferta": true,
-    "porcentaje_descuento": 23,
+    "porcentaje_descuento": 31,
     "descripcion_corta": "Vestido midi elegante perfecto para ocasiones especiales.",
     "descripcion_larga": "Confeccionado en tela premium con corte midi que estiliza la figura. Diseño atemporal que combina elegancia y comodidad. Ideal para eventos, cenas especiales o reuniones importantes.",
     "fotos": [
@@ -19,17 +18,34 @@
     "disponible": true,
     "cantidad_stock": 25,
     "detalles": {
-      "tallas_disponibles": ["XS", "S", "M", "L", "XL"],
+      "tallas_disponibles": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
       "colores_disponibles": [
-        {"nombre": "Negro", "hex": "#000000"},
-        {"nombre": "Azul Marino", "hex": "#001f3f"}
+        {
+          "nombre": "Negro",
+          "hex": "#000000"
+        },
+        {
+          "nombre": "Azul Marino",
+          "hex": "#001f3f"
+        }
       ],
       "material": "95% Poliéster, 5% Elastano",
       "cuidados": "Lavar en seco o a máquina en ciclo delicado."
     },
     "fecha_agregado": "2024-01-15T10:00:00Z",
     "slug_url_producto": "vestido-midi-elegante-negro",
-    "etiquetas": ["elegante", "ocasion-especial", "popular", "nueva-coleccion"]
+    "etiquetas": [
+      "elegante",
+      "ocasion-especial",
+      "popular",
+      "nueva-coleccion"
+    ]
   },
   {
     "sku": "LUX002",
@@ -50,17 +66,34 @@
     "disponible": true,
     "cantidad_stock": 40,
     "detalles": {
-      "tallas_disponibles": ["S", "M", "L", "XL", "XXL"],
+      "tallas_disponibles": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
       "colores_disponibles": [
-        {"nombre": "Blanco", "hex": "#FFFFFF"},
-        {"nombre": "Celeste", "hex": "#ADD8E6"}
+        {
+          "nombre": "Blanco",
+          "hex": "#FFFFFF"
+        },
+        {
+          "nombre": "Celeste",
+          "hex": "#ADD8E6"
+        }
       ],
       "material": "100% Algodón Oxford",
       "cuidados": "Lavar a máquina a 30°C. Planchar a temperatura media."
     },
     "fecha_agregado": "2024-01-20T14:00:00Z",
     "slug_url_producto": "camisa-oxford-premium-blanca",
-    "etiquetas": ["clasico", "formal", "algodon", "popular"]
+    "etiquetas": [
+      "clasico",
+      "formal",
+      "algodon",
+      "popular"
+    ]
   },
   {
     "sku": "LUX003",
@@ -81,17 +114,33 @@
     "disponible": true,
     "cantidad_stock": 15,
     "detalles": {
-      "tallas_disponibles": ["XS", "S", "M", "L"],
+      "tallas_disponibles": [
+        "XS",
+        "S",
+        "M",
+        "L"
+      ],
       "colores_disponibles": [
-        {"nombre": "Dorado", "hex": "#FFD700"},
-        {"nombre": "Champagne", "hex": "#F7E7CE"}
+        {
+          "nombre": "Dorado",
+          "hex": "#FFD700"
+        },
+        {
+          "nombre": "Champagne",
+          "hex": "#F7E7CE"
+        }
       ],
       "material": "92% Poliéster, 8% Seda",
       "cuidados": "Lavar en seco únicamente."
     },
     "fecha_agregado": "2024-02-01T09:00:00Z",
     "slug_url_producto": "blusa-saten-dorada",
-    "etiquetas": ["glamour", "noche", "oferta", "nueva-coleccion"]
+    "etiquetas": [
+      "glamour",
+      "noche",
+      "oferta",
+      "nueva-coleccion"
+    ]
   },
   {
     "sku": "LUX004",
@@ -112,17 +161,35 @@
     "disponible": true,
     "cantidad_stock": 30,
     "detalles": {
-      "tallas_disponibles": ["30", "32", "34", "36", "38", "40"],
+      "tallas_disponibles": [
+        "30",
+        "32",
+        "34",
+        "36",
+        "38",
+        "40"
+      ],
       "colores_disponibles": [
-        {"nombre": "Beige", "hex": "#F5F5DC"},
-        {"nombre": "Azul Marino", "hex": "#001f3f"}
+        {
+          "nombre": "Beige",
+          "hex": "#F5F5DC"
+        },
+        {
+          "nombre": "Azul Marino",
+          "hex": "#001f3f"
+        }
       ],
       "material": "98% Algodón, 2% Elastano",
       "cuidados": "Lavar a máquina a 30°C. No usar blanqueador."
     },
     "fecha_agregado": "2024-02-05T11:00:00Z",
     "slug_url_producto": "pantalon-chino-beige",
-    "etiquetas": ["casual", "versatil", "algodon", "nueva-coleccion"]
+    "etiquetas": [
+      "casual",
+      "versatil",
+      "algodon",
+      "nueva-coleccion"
+    ]
   },
   {
     "sku": "LUX005",
@@ -143,17 +210,36 @@
     "disponible": true,
     "cantidad_stock": 35,
     "detalles": {
-      "tallas_disponibles": ["25", "26", "27", "28", "29", "30", "31"],
+      "tallas_disponibles": [
+        "25",
+        "26",
+        "27",
+        "28",
+        "29",
+        "30",
+        "31"
+      ],
       "colores_disponibles": [
-        {"nombre": "Azul Oscuro", "hex": "#191970"},
-        {"nombre": "Negro", "hex": "#000000"}
+        {
+          "nombre": "Azul Oscuro",
+          "hex": "#191970"
+        },
+        {
+          "nombre": "Negro",
+          "hex": "#000000"
+        }
       ],
       "material": "75% Algodón, 23% Poliéster, 2% Elastano",
       "cuidados": "Lavar del revés en agua fría. No usar blanqueador."
     },
     "fecha_agregado": "2024-02-10T16:00:00Z",
     "slug_url_producto": "jeans-skinny-azul-oscuro",
-    "etiquetas": ["denim", "casual", "oferta", "popular"]
+    "etiquetas": [
+      "denim",
+      "casual",
+      "oferta",
+      "popular"
+    ]
   },
   {
     "sku": "LUX006",
@@ -174,17 +260,37 @@
     "disponible": true,
     "cantidad_stock": 45,
     "detalles": {
-      "tallas_disponibles": ["S", "M", "L", "XL", "XXL"],
+      "tallas_disponibles": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
       "colores_disponibles": [
-        {"nombre": "Rojo", "hex": "#DC143C"},
-        {"nombre": "Azul Marino", "hex": "#001f3f"},
-        {"nombre": "Blanco", "hex": "#FFFFFF"}
+        {
+          "nombre": "Rojo",
+          "hex": "#DC143C"
+        },
+        {
+          "nombre": "Azul Marino",
+          "hex": "#001f3f"
+        },
+        {
+          "nombre": "Blanco",
+          "hex": "#FFFFFF"
+        }
       ],
       "material": "100% Algodón Piqué",
       "cuidados": "Lavar a máquina a 30°C. Planchar a temperatura baja."
     },
     "fecha_agregado": "2024-02-12T13:00:00Z",
     "slug_url_producto": "polo-classic-fit-rojo",
-    "etiquetas": ["casual", "sport", "algodon", "nueva-coleccion"]
+    "etiquetas": [
+      "casual",
+      "sport",
+      "algodon",
+      "nueva-coleccion"
+    ]
   }
 ]
