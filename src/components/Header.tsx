@@ -1,10 +1,16 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ShoppingBag, Search, Menu, X, User, Phone } from 'lucide-react';
+import { ShoppingBag, Search, Menu, X, User, Phone, ChevronDown } from 'lucide-react';
 import { useStore } from '../context/StoreContext';
 import { Button } from '@/components/ui/button';
 import { useMagneticEffect } from '../hooks/useScrollAnimation';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 
 const Header = () => {
   const { config, getCartItemsCount } = useStore();
@@ -85,29 +91,86 @@ const Header = () => {
 
           {/* Desktop Navigation with better spacing */}
           <nav className="hidden lg:flex items-center space-x-6 xl:space-x-8 flex-1 justify-center">
-            {(config.menu_navegacion_principal || []).map((item, index) => (
-              <div key={index} className="relative group">
-                <Link
-                  to={item.url}
-                  className="text-foreground/80 hover:text-foreground transition-all duration-300 font-medium text-sm xl:text-base relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-primary after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left whitespace-nowrap"
-                >
-                  {item.texto}
-                </Link>
-                {item.subcategorias && Array.isArray(item.subcategorias) && (
-                  <div className="absolute top-full left-0 mt-2 w-48 glass-morphism shadow-lg border border-border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 rounded-lg">
-                    {item.subcategorias.map((subitem, subindex) => (
-                      <Link
-                        key={subindex}
-                        to={subitem.url}
-                        className="block px-4 py-2 text-foreground/80 hover:bg-muted hover:text-foreground transition-all duration-200 first:rounded-t-lg last:rounded-b-lg text-sm"
-                      >
-                        {subitem.texto}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
+            {(config.menu_navegacion_principal || []).map((item, index) => {
+              // Manejar "Productos" con dropdown
+              if (item.texto === "Todos los productos") {
+                return (
+                  <DropdownMenu key={index}>
+                    <DropdownMenuTrigger className="text-foreground/80 hover:text-foreground transition-all duration-300 font-medium text-sm xl:text-base relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-primary after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left whitespace-nowrap flex items-center gap-1">
+                      Productos
+                      <ChevronDown className="w-4 h-4" />
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent className="bg-white border border-gray-200 shadow-lg rounded-lg min-w-[160px] z-50">
+                      <DropdownMenuItem className="hover:bg-gray-100 focus:bg-gray-100">
+                        <Link 
+                          to="/productos" 
+                          className="w-full text-gray-900 hover:text-gray-900 font-medium"
+                        >
+                          Todos
+                        </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem className="hover:bg-gray-100 focus:bg-gray-100">
+                        <Link 
+                          to="/productos?categoria=Camisas" 
+                          className="w-full text-gray-900 hover:text-gray-900 font-medium"
+                        >
+                          Camisas
+                        </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem className="hover:bg-gray-100 focus:bg-gray-100">
+                        <Link 
+                          to="/productos?categoria=Pantalones" 
+                          className="w-full text-gray-900 hover:text-gray-900 font-medium"
+                        >
+                          Pantalones
+                        </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem className="hover:bg-gray-100 focus:bg-gray-100">
+                        <Link 
+                          to="/productos?categoria=Polos" 
+                          className="w-full text-gray-900 hover:text-gray-900 font-medium"
+                        >
+                          Polos
+                        </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem className="hover:bg-gray-100 focus:bg-gray-100">
+                        <Link 
+                          to="/productos?categoria=Accesorios" 
+                          className="w-full text-gray-900 hover:text-gray-900 font-medium"
+                        >
+                          Accesorios
+                        </Link>
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                );
+              }
+
+              // Otros items del menú sin cambios
+              return (
+                <div key={index} className="relative group">
+                  <Link
+                    to={item.url}
+                    className="text-foreground/80 hover:text-foreground transition-all duration-300 font-medium text-sm xl:text-base relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-primary after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left whitespace-nowrap"
+                  >
+                    {item.texto}
+                  </Link>
+                  {item.subcategorias && Array.isArray(item.subcategorias) && (
+                    <div className="absolute top-full left-0 mt-2 w-48 bg-white shadow-lg border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 rounded-lg">
+                      {item.subcategorias.map((subitem, subindex) => (
+                        <Link
+                          key={subindex}
+                          to={subitem.url}
+                          className="block px-4 py-2 text-gray-900 hover:bg-gray-100 transition-all duration-200 first:rounded-t-lg last:rounded-b-lg text-sm font-medium"
+                        >
+                          {subitem.texto}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </nav>
 
           {/* Search bar - hidden on smaller screens to save space */}
@@ -180,7 +243,7 @@ const Header = () => {
 
       {/* Mobile menu */}
       {isMenuOpen && (
-        <div className="lg:hidden bg-background border-t border-border glass-morphism">
+        <div className="lg:hidden bg-background border-t border-border">
           <div className="px-4 py-4 space-y-2">
             {(config.menu_navegacion_principal || []).map((item, index) => (
               <div key={index} className="animate-fade-in-up" style={{ animationDelay: `${index * 100}ms` }}>
